@@ -1,0 +1,10 @@
+# vim: ft=ansible
+---
+- hosts: "{{ target }}"
+  sudo: yes
+  vars:
+    target: 127.0.0.1
+  tasks:
+  - shell: iptables -I OUTPUT 1 -j ACCEPT
+  - include: tasks/zookeeper.yml
+  - include: tasks/exhibitor.yml

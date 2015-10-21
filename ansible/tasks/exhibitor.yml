@@ -1,0 +1,7 @@
+---
+- name: exhibitor | install
+  script: scripts/install_exhibitor.sh creates=/usr/share/java/exhibitor.jar
+- name: exhibitor | install service
+  copy: src=files/exhibitor.service dest=/etc/systemd/system/exhibitor.service
+- name: exhibitor | enable service
+  service: name=exhibitor enabled=yes

@@ -1,0 +1,47 @@
+{
+  "variables": {
+    "git_sha": "{{env `GIT_SHA`}}",
+    "source_ami": "{{env `SOURCE_AMI`}}",
+    "ssh_username": "centos",
+    "region": "{{env `AMI_REGION`}}",
+    "ami_regions": "{{env `AMI_REGIONS`}}",
+    "instance_type": "m3.2xlarge",
+    "role": "{{env `ROLE`}}",
+    "ami_name": "{{env `NAME`}}-{{isotime \"2006-01-02-15-04-05\"}}",
+    "git_branch": "{{env `GIT_BRANCH`}}",
+    "git_describe": "{{env `GIT_DESCRIBE`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ssh_pty" : true,
+      "source_ami": "{{ user `source_ami` }}",
+      "tags": {
+        "GIT_SHA": "{{ user `git_sha` }}",
+        "Role": "{{ user `role` }}",
+        "GIT_DESCRIBE": "{{ user `git_describe` }}",
+        "SOURCE_AMI": "{{ user `source_ami` }}"
+      },
+      "ssh_username": "{{ user `ssh_username` }}",
+      "region": "{{ user `region` }}",
+      "ami_regions": "{{ user `ami_regions` }}",
+      "ami_name": "{{ user `ami_name` }}",
+      "instance_type": "{{ user `instance_type` }}",
+      "ami_block_device_mappings": [
+        {
+          "device_name": "sdb",
+          "volume_size": 8,
+          "delete_on_termination": true,
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/playbook.yml",
+      "playbook_dir": "ansible"
+    }
+  ]
+}

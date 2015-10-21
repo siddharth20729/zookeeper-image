@@ -1,0 +1,24 @@
+[Unit]
+Description=Exhibitor (ZooKeeper watcher)
+After=network.target cloud-final.service
+
+[Service]
+User=zookeeper
+Group=zookeeper
+SyslogIdentifier=exhibitor
+EnvironmentFile=/etc/sysconfig/exhibitor
+ExecStart=/usr/bin/java \
+  -jar /usr/share/java/exhibitor.jar \
+  --port ${EXHIBITOR_PORT} \
+  --defaultconfig /etc/exhibitor.properties \
+  --configtype s3 \
+  --s3config ${S3_BUCKET}:${S3_PREFIX} \
+  --s3region ${AWS_REGION} \
+  --s3backup true
+Restart=on-failure
+RestartSec=30s
+TimeoutSec=5min
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

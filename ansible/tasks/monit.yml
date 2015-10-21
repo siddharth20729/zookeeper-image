@@ -1,0 +1,13 @@
+---
+- name: monit | add zookeeper check scripts
+  copy: src=files/monit/{{ item }} dest=/etc/monit/scripts/{{ item }} mode=0755
+  with_items:
+  - zookeeper_ruok.sh
+  - exhibitor_port.sh
+- name: monit | add zookeeper checks
+  copy: src=files/monit/{{ item }} dest=/etc/monit/conf.d/{{ item }}
+  with_items:
+  - zookeeper_log_dir.check
+  - zookeeper_checks
+  - exhibitor_checks
+  - zookeeper_log_dir.check

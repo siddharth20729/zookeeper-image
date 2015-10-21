@@ -1,0 +1,6 @@
+check process exhibitor
+        matching "/usr/share/java/exhibitor.jar"
+        if does not exist then exec "uname -a"
+
+check program exhibitor_ui_port with path "/etc/monit/scripts/exhibitor_port.sh"
+        if status !=0 then exec "unama -a"

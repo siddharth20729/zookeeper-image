@@ -1,0 +1,2 @@
+check program zookeeper_ruok with path "/etc/monit/scripts/zookeeper_ruok.sh"
+        if status != 0 then exec "uname -a"
