@@ -8,5 +8,6 @@ machine:
 
 test:
   override:
+  - mvn -B -f vendor/exhibitor/pom.xml package
   - ./run:
       timeout: 3600 # one hour

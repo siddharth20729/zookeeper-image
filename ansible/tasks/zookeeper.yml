@@ -1,7 +1,7 @@
 # vim: ft=ansible
 ---
 - name: zookeeper | install
-  script: scripts/install_zookeeper.sh creates=/var/lib/zookeeper
+  script: scripts/zookeeper.sh creates=/var/lib/zookeeper
 - name: zookeeper | create group
   group: name=zookeeper system=yes
 - name: zookeeper | create user

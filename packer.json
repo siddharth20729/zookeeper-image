@@ -39,6 +39,11 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "vendor/exhibitor/target/exhibitor-1.5.5.jar",
+      "destination": "/tmp/exhibitor.jar"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "ansible/playbook.yml",
       "playbook_dir": "ansible"
