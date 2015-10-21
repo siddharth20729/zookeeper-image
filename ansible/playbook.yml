@@ -8,3 +8,4 @@
   - shell: iptables -I OUTPUT 1 -j ACCEPT
   - include: tasks/zookeeper.yml
   - include: tasks/exhibitor.yml
+  - include: tasks/monit.yml
