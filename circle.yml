@@ -10,6 +10,3 @@ test:
   override:
   - ./run:
       timeout: 3600 # one hour
-notify:
-  webhooks:
-    - url: https://hooks.slack.com/services/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 
